@@ -1,0 +1,3 @@
+redis: redis-server --daemonize yes
+nitter: /entrypoint.sh
+caddy: caddy adapt
