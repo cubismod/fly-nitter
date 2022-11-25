@@ -12,7 +12,11 @@ kill_timeout = 2
   processes = ["app"]
   protocol = "tcp"
 
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 200
+    soft_limit = 100
+
   [[services.ports]]
     handlers = ["tls", "http"]
     port = "443"
-

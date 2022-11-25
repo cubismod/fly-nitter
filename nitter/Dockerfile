@@ -1,18 +1,16 @@
-FROM 'quay.io/unixfox/nitter'
+FROM 'zedeus/nitter'
 
 COPY ./nitter.conf /src/nitter.conf
 
 WORKDIR /src/app
 
-RUN apk --no-cache add redis caddy python
+RUN apk --no-cache add redis python3 nginx
 
-ENV overmind=overmind-v2.3.0-linux-amd64
+RUN python3 -m ensurepip && python3 -m pip install supervisor
 
-RUN wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/${overmind}.gz && \
-    gunzip ${overmind}.gz && chmod +x ${overmind}
+RUN mkdir /src/app/cache
 
-COPY ./Procfile ./
+COPY ./supervisord.conf ./ 
+COPY ./nginx.conf ./
 
-COPY ./Caddyfile ./
-
-CMD /src/app/${overmind} start
+CMD [ "supervisord", "-c", "./supervisord.conf" ]
