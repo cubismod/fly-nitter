@@ -12,11 +12,11 @@ running this on Docker itself.
 
 This file should be placed in [.nitter](./nitter/)
 
-```conf
+```ini
 [Server]
 address = "127.0.0.1"
 port = 19379
-https = false  # disable to enable cookies when not using https
+https = false
 httpMaxConnections = 100
 staticDir = "./public"
 title = "<your-title>"
@@ -24,7 +24,7 @@ hostname = "<your-hostname>"
 
 [Cache]
 listMinutes = 240  
-rssMinutes = 10  # how long to cache rss queries
+rssMinutes = 10 
 redisHost = "localhost"  
 redisPort = 6379
 redisConnections = 20  
