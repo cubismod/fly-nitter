@@ -4,9 +4,10 @@ COPY ./nitter.conf /src/nitter.conf
 
 WORKDIR /src/app
 
-RUN apk --no-cache add redis python3 nginx
+USER root
 
-RUN python3 -m ensurepip && python3 -m pip install supervisor
+RUN apk --no-cache add redis python3 nginx && \
+    python3 -m ensurepip && python3 -m pip install supervisor
 
 RUN mkdir /src/app/cache
 
